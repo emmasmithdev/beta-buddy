@@ -11,9 +11,8 @@ class PostContainer extends Component {
   }
 
   componentDidMount(){
-    const url = 'https://jsonplaceholder.typicode.com/posts'
 
-    fetch(url)
+    fetch('https://jsonplaceholder.typicode.com/posts')
       .then(res => res.json())
       .then(data => this.setState({posts: data}))
       .catch(err => console.error);
@@ -39,7 +38,7 @@ class PostContainer extends Component {
 
     return(
       <Fragment>
-      <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="Search for keywords"/>
+      <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)} placeholder="Search for a phrase"/>
       <div className="postList">
         <PostList posts={posts} />
       </div>
