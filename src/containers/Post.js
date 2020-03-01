@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import CommentList from '../components/CommentList.js';
 
 class Post extends Component {
   constructor(props){
@@ -8,6 +9,8 @@ class Post extends Component {
       comments: [],
       buttonClick: false
     }
+    this.handleClick = this.handleClick.bind(this);
+    this.showComments = this.showComments.bind(this);
   }
 
   componentDidMount(){
@@ -27,9 +30,17 @@ class Post extends Component {
       .catch(err => console.error);
   }
 
-  handleClick(event){
-    
-  }
+  handleClick(event) {
+   this.setState(state => ({
+     buttonClick: !state.buttonClick
+   }));
+ }
+
+ showComments(){
+   if (this.state.buttonClick ){
+     return <CommentList comments={this.state.comments}/>
+   }
+ }
 
   render(){
     return (
@@ -37,7 +48,8 @@ class Post extends Component {
         <p className="postTitle">{this.props.post.title}</p>
           <p className="userName">{this.state.user.name}</p>
         <p className="postBody">{this.props.post.body}</p>
-        <button onclick={handleClick}>Show/Hide Comments</button>
+        <button onClick={this.handleClick}>{this.state.buttonClick ? 'Hide Comments' : 'Show Comments'}</button>
+        {this.showComments()}
       </Fragment>
     )
   }
