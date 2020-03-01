@@ -30,6 +30,7 @@ const App = () => {
             <div className="post-container">
               <PostContainer />
             </div>
+            <footer>Emma Smith | March 2020</footer>
         </div>
     );
 };
